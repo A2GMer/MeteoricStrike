@@ -1,0 +1,43 @@
+﻿<Properties StartupConfiguration="{77614BEC-56B1-4F5A-C4D6-F6011628BD65}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BossEnemyShip.cs">
+    <Files>
+      <File FileName="Assets/Scripts/PlayerShip.cs" Line="41" Column="10" />
+      <File FileName="Assets/Scripts/PlayerBullet.cs" Line="13" Column="9" />
+      <File FileName="Assets/Scripts/EnemyShip.cs" Line="31" Column="43" />
+      <File FileName="Assets/Scripts/EnemyGenerator.cs" Line="12" Column="12" />
+      <File FileName="Assets/Scripts/Explosion.cs" Line="7" Column="19" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="16" Column="25" />
+      <File FileName="Assets/Scripts/EnemyBullet.cs" Line="13" Column="37" />
+      <File FileName="Assets/Scripts/BossEnemyShip.cs" Line="32" Column="51" />
+      <File FileName="Assets/Scripts/BossEnemyBullet.cs" Line="10" Column="22" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="2d-shooting-game-master" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="BossEnemyShip.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="Unity" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="15adfa19-a0ed-4491-97fa-b00ba4cc2b5f" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
