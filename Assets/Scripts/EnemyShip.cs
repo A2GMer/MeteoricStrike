@@ -43,12 +43,14 @@ public class EnemyShip : MonoBehaviour
     void Update()
     {
         // 敵の移動：真下に移動する
+        transform.position -= new Vector3(0,Time.deltaTime,0);
+
         // 敵が左右に移動する
-        transform.position -= new Vector3(
-            Mathf.Cos(Time.frameCount * 0.02f + offset) * 0.01f,
-            Time.deltaTime,
-            0
-            );
+        //transform.position -= new Vector3(
+        //    Mathf.Cos(Time.frameCount * 0.02f + offset) * 0.01f,
+        //    Time.deltaTime,
+        //    0
+        //    );
 
         // 敵の表示範囲
         if (transform.position.y < -3)
