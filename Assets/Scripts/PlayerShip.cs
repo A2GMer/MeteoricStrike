@@ -60,10 +60,8 @@ public class PlayerShip : MonoBehaviour
     void Move()
     {
         float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
-        Vector3 nextPosition = transform.position + new Vector3(x, y, 0) * Time.deltaTime * 4f;
-        // Playerの移動範囲制御
-        // x:(-2.9,2.9) y:(-2,2)
+        // Playerの移動範囲制御（左右のみ）
+        Vector3 nextPosition = transform.position + new Vector3(x, 0, 0) * Time.deltaTime * 4f;
         nextPosition = new Vector3(
             Mathf.Clamp(nextPosition.x, -2.9f, 2.9f),
             Mathf.Clamp(nextPosition.y, -2f, 2f),
