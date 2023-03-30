@@ -28,7 +28,7 @@ public class EnemyShip : MonoBehaviour
     void Start()
     {
         offset = Random.Range(0, 2f * Mathf.PI);
-        InvokeRepeating("Shot", 2f, 0.5f);
+        //InvokeRepeating("Shot", 2f, 0.5f);
         // GameObject.Find("GameController");
         // ・ヒエラルキー上のGameControllerという名前のオブジェクトを取得
         gameController = GameObject.Find("GameController").GetComponent<GameController>(); ;
