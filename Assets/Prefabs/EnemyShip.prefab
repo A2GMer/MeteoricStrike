@@ -122,6 +122,7 @@ MonoBehaviour:
     type: 3}
   bulletPrefab: {fileID: 6222910394220528336, guid: 5e976379385d247bebfe7bbc4ec3dcca,
     type: 3}
+  enemyGenerator: {fileID: 0}
 --- !u!58 &969353086443821532
 CircleCollider2D:
   m_ObjectHideFlags: 0

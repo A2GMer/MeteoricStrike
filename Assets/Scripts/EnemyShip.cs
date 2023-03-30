@@ -24,6 +24,7 @@ public class EnemyShip : MonoBehaviour
 
     // GameControllerの入れ物を作る：AddScoreを使いたから
     GameController gameController;
+    EnemyGenerator enemyGenerator;
     float offset;
     void Start()
     {
@@ -31,7 +32,9 @@ public class EnemyShip : MonoBehaviour
         //InvokeRepeating("Shot", 2f, 0.5f);
         // GameObject.Find("GameController");
         // ・ヒエラルキー上のGameControllerという名前のオブジェクトを取得
-        gameController = GameObject.Find("GameController").GetComponent<GameController>(); ;
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        // ・ヒエラルキー上のEnemyGeneratorという名前のオブジェクトを取得
+        enemyGenerator = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>();
     }
 
     void Shot()
@@ -77,6 +80,7 @@ public class EnemyShip : MonoBehaviour
         {
             // スコア加算
             gameController.AddScore();
+            enemyGenerator.OnEnemyDestroyed();
         }
         else if (collision.CompareTag("EnemyBullet") == true)
         {
