@@ -20,12 +20,18 @@ public class EnemyGenerator : MonoBehaviour
         // 現在の敵数が最大敵数より少なければ生成する
         if (currentEnemyCount < Const.COUNT.CONST_MAX_ENEMY)
         {
-            // 生成する位置（x座標）をランダムにしたい
+            // 画面端のx座標を求める
+            float screenX = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0f, 0f)).x;
+
+            // ランダムに左右を決める
+            int direction = Random.Range(0, 2) == 0 ? -1 : 1;
+
+            // 生成する位置を決定する
             Vector3 spawnPosition = new Vector3(
-                Random.Range(-2.5f, 2.5f),
-                transform.position.y,
+                screenX * direction,  // 画面端のx座標にランダムに左右を決めた値を掛けて出現位置を決定
+                transform.position.y - 2f,
                 transform.position.z
-                );
+            );
 
             Instantiate(
                 enemyPrefab,        // 生成するオブジェクト
