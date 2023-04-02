@@ -4,7 +4,6 @@ public class EnemyGenerator : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject bossEnemyPrefab;
-    public int maxEnemyCount = 3; // 最大敵数
     private int currentEnemyCount = 0; // 現在の敵数
 
     // Start is called before the first frame update
@@ -19,7 +18,7 @@ public class EnemyGenerator : MonoBehaviour
     void Spawn()
     {
         // 現在の敵数が最大敵数より少なければ生成する
-        if (currentEnemyCount < maxEnemyCount)
+        if (currentEnemyCount < Const.COUNT.CONST_MAX_ENEMY)
         {
             // 生成する位置（x座標）をランダムにしたい
             Vector3 spawnPosition = new Vector3(
@@ -42,7 +41,7 @@ public class EnemyGenerator : MonoBehaviour
     void BossSpawn()
     {
         Instantiate(
-            bossEnemyPrefab,        // 生成するオブジェクト
+            bossEnemyPrefab,    // 生成するオブジェクト
             transform.position, // 生成時の位置
             transform.rotation  // 生成時の向き
         );

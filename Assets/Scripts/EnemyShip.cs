@@ -46,7 +46,7 @@ public class EnemyShip : MonoBehaviour
     void Update()
     {
         // 敵の移動：真下に移動する
-        transform.position -= new Vector3(0,Time.deltaTime,0);
+        //transform.position -= new Vector3(0,Time.deltaTime,0);
 
         // 敵が左右に移動する
         //transform.position -= new Vector3(
@@ -59,6 +59,8 @@ public class EnemyShip : MonoBehaviour
         if (transform.position.y < -3)
         {
             Destroy(gameObject);
+            // 敵数カウントを減らす
+            enemyGenerator.OnEnemyDestroyed();
         }
     }
 
@@ -80,7 +82,6 @@ public class EnemyShip : MonoBehaviour
         {
             // スコア加算
             gameController.AddScore();
-            enemyGenerator.OnEnemyDestroyed();
         }
         else if (collision.CompareTag("EnemyBullet") == true)
         {
@@ -90,6 +91,38 @@ public class EnemyShip : MonoBehaviour
         {
             return; // 何もしない
         }
+        else if (collision.CompareTag("EnemyShip") == true)
+        {
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            Vector2 force = rb.velocity.normalized * -1f * 3f;
+            rb.AddForce(force, ForceMode2D.Impulse);
+            return;
+        }
+        else if (collision.CompareTag("Ground") == true)
+        {
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.velocity = Vector2.zero;
+            rb.AddForce(Vector2.up * 8f, ForceMode2D.Impulse);
+            return;
+        }
+        else if (collision.CompareTag("WallRight") == true)
+        {
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.AddForce(Vector2.left * 3f, ForceMode2D.Impulse);
+            return;
+        }
+        else if (collision.CompareTag("WallLeft") == true)
+        {
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.AddForce(Vector2.right * 3f, ForceMode2D.Impulse);
+            return;
+        }
+        else
+        {
+            return; // 何もしない
+        }
+        // 敵数カウントを減らす
+        enemyGenerator.OnEnemyDestroyed();
         // 破壊する時に爆発エフェクト生成（生成したいもの、場所、回転）
         Instantiate(explosion, transform.position, transform.rotation);
         // EnemyShipを破壊

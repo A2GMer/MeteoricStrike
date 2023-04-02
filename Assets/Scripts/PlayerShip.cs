@@ -25,7 +25,7 @@ public class PlayerShip : MonoBehaviour
     {
         // 同じオブジェクト内の"AudioSource"というコンポーネントを取得
         audioSource = GetComponent<AudioSource>();
-        gameController = GameObject.Find("GameController").GetComponent<GameController>(); ;
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     // 約0.2秒に一回実行される関数

@@ -7,6 +7,9 @@ TagManager:
   - Bullet
   - EnemyBullet
   - BossEnemyShip
+  - Ground
+  - WallRight
+  - WallLeft
   layers:
   - Default
   - TransparentFX
