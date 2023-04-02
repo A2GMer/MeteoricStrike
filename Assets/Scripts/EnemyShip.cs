@@ -90,8 +90,11 @@ public class EnemyShip : MonoBehaviour
         else if (collision.CompareTag("Ground") == true)
         {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.velocity = Vector2.zero;
-            ApplyForce(Vector2.up * 8f);
+            // 地面に衝突する前の横方向の速度を取得し、y方向の速度を反転させてバウンドするようにする
+            Vector2 velocity = rb.velocity;
+            //rb.velocity = new Vector2(velocity.x, -velocity.y);
+            // 上方向に加速度を加える
+            ApplyForce(new Vector2(velocity.x, -velocity.y) * 4f);
             return;
         }
         else if (collision.CompareTag("WallRight") == true)
