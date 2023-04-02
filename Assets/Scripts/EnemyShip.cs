@@ -87,16 +87,6 @@ public class EnemyShip : MonoBehaviour
         {
             return; // 何もしない
         }
-        else if (collision.CompareTag("BossEnemyShip") == true)
-        {
-            return; // 何もしない
-        }
-        else if (collision.CompareTag("EnemyShip") == true)
-        {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            ApplyForce(rb.velocity.normalized * -1f * 3f);
-            return;
-        }
         else if (collision.CompareTag("Ground") == true)
         {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
