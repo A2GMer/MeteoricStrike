@@ -101,7 +101,7 @@ public class EnemyShip : MonoBehaviour
         }
         else if (collision.CompareTag("WallLeft") == true)
         {
-            ApplyForce(Vector2.right * 8f);
+            ApplyForce(Vector2.right * 3f);
             return;
         }
         else
