@@ -94,27 +94,24 @@ public class EnemyShip : MonoBehaviour
         else if (collision.CompareTag("EnemyShip") == true)
         {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            Vector2 force = rb.velocity.normalized * -1f * 3f;
-            rb.AddForce(force, ForceMode2D.Impulse);
+            ApplyForce(rb.velocity.normalized * -1f * 3f);
             return;
         }
         else if (collision.CompareTag("Ground") == true)
         {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.velocity = Vector2.zero;
-            rb.AddForce(Vector2.up * 8f, ForceMode2D.Impulse);
+            ApplyForce(Vector2.up * 8f);
             return;
         }
         else if (collision.CompareTag("WallRight") == true)
         {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.AddForce(Vector2.left * 3f, ForceMode2D.Impulse);
+            ApplyForce(Vector2.left * 3f);
             return;
         }
         else if (collision.CompareTag("WallLeft") == true)
         {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.AddForce(Vector2.right * 3f, ForceMode2D.Impulse);
+            ApplyForce(Vector2.right * 8f);
             return;
         }
         else
@@ -129,5 +126,11 @@ public class EnemyShip : MonoBehaviour
         Destroy(gameObject);
         // Collisionはぶつかった相手の情報が入っている。この場合は弾
         Destroy(collision.gameObject);
+    }
+
+    private void ApplyForce(Vector2 force)
+    {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.AddForce(force, ForceMode2D.Impulse);
     }
 }
