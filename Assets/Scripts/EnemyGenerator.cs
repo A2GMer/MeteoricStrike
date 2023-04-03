@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyGenerator : MonoBehaviour
 {
@@ -58,6 +59,23 @@ public class EnemyGenerator : MonoBehaviour
     {
         // 敵が撃破されたら、現在の敵数を1減らす
         currentEnemyCount--;
+    }
+
+    public void DivededSpawn(Vector3 position)
+    {
+        GameObject rightEnemy = Instantiate(enemyPrefab, position, Quaternion.identity);
+        // 敵が撃破されたら、現在の敵数を1増やす
+        currentEnemyCount++;
+        GameObject leftEnemy = Instantiate(enemyPrefab, position, Quaternion.identity);
+        // 敵が撃破されたら、現在の敵数を1増やす
+        currentEnemyCount++;
+
+        // 敵に速度を与える
+        Rigidbody2D rightRigidbody = rightEnemy.GetComponent<Rigidbody2D>();
+        Rigidbody2D leftRigidbody = leftEnemy.GetComponent<Rigidbody2D>();
+
+        rightRigidbody.AddForce(Vector2.right * 2.0f, ForceMode2D.Impulse);
+        leftRigidbody.AddForce(Vector2.left * 2.0f, ForceMode2D.Impulse);
     }
 
     // Update is called once per frame

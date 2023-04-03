@@ -2,6 +2,11 @@ namespace Const
 {
     public static class COUNT
     {
-        public const int CONST_MAX_ENEMY = 3;
+        public const int CONST_MAX_ENEMY = 1;
+    }
+
+    public static class POSITION
+    {
+        public const float CONST_BOUNCE_HEIGHT = 17f;
     }
 }

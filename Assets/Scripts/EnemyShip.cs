@@ -25,6 +25,13 @@ public class EnemyShip : MonoBehaviour
     // GameControllerの入れ物を作る：AddScoreを使いたから
     GameController gameController;
     EnemyGenerator enemyGenerator;
+    private int hitCount;
+
+    public EnemyShip()
+    {
+        hitCount = 0;
+    }
+
     float offset;
     void Start()
     {
@@ -45,16 +52,6 @@ public class EnemyShip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 敵の移動：真下に移動する
-        //transform.position -= new Vector3(0,Time.deltaTime,0);
-
-        // 敵が左右に移動する
-        //transform.position -= new Vector3(
-        //    Mathf.Cos(Time.frameCount * 0.02f + offset) * 0.01f,
-        //    Time.deltaTime,
-        //    0
-        //    );
-
         // 敵の表示範囲
         if (transform.position.y < -3)
         {
@@ -82,6 +79,14 @@ public class EnemyShip : MonoBehaviour
         {
             // スコア加算
             gameController.AddScore();
+            // hitCountをインクリメント
+            hitCount++;
+            // hitCountが3に達した場合は敵を破壊
+            if (hitCount >= 3)
+            {
+                DestroyEnemy();
+                enemyGenerator.DivededSpawn(transform.position);
+            }
         }
         else if (collision.CompareTag("EnemyBullet") == true)
         {
@@ -89,40 +94,49 @@ public class EnemyShip : MonoBehaviour
         }
         else if (collision.CompareTag("Ground") == true)
         {
-            ApplyForce(Vector2.up * 8f);
+            // 接地している速度を取得する
+            float contactSpeed = Mathf.Abs(GetComponent<Rigidbody2D>().velocity.y);
+
+            // 速度に応じて反発力を調整する
+            float forceMagnitude = Mathf.Lerp(3f, Const.POSITION.CONST_BOUNCE_HEIGHT, Mathf.InverseLerp(0f, 10f, contactSpeed));
+            ApplyForce(Vector2.up * forceMagnitude, false);
             return;
         }
         else if (collision.CompareTag("WallRight") == true)
         {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.velocity = Vector2.zero;
-            ApplyForce(Vector2.left * 1f);
+            ApplyForce(Vector2.left * 1f, true);
             return;
         }
         else if (collision.CompareTag("WallLeft") == true)
         {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.velocity = Vector2.zero;
-            ApplyForce(Vector2.right * 1f);
+            ApplyForce(Vector2.right * 1f, true);
             return;
         }
         else
         {
             return; // 何もしない
         }
+        // Collisionはぶつかった相手の情報が入っている。この場合は弾
+        Destroy(collision.gameObject);
+    }
+
+    private void DestroyEnemy()
+    {
         // 敵数カウントを減らす
         enemyGenerator.OnEnemyDestroyed();
         // 破壊する時に爆発エフェクト生成（生成したいもの、場所、回転）
         Instantiate(explosion, transform.position, transform.rotation);
         // EnemyShipを破壊
         Destroy(gameObject);
-        // Collisionはぶつかった相手の情報が入っている。この場合は弾
-        Destroy(collision.gameObject);
     }
 
-    private void ApplyForce(Vector2 force)
+    private void ApplyForce(Vector2 force, bool iskillspeed)
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (iskillspeed)
+        {
+            rb.velocity = Vector2.zero;  // 速度を一度ゼロにする
+        }
         rb.AddForce(force, ForceMode2D.Impulse);
     }
 }
