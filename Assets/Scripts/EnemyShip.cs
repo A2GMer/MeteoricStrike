@@ -85,7 +85,7 @@ public class EnemyShip : MonoBehaviour
             if (hitCount >= 3)
             {
                 DestroyEnemy();
-                enemyGenerator.DivededSpawn(transform.position);
+                enemyGenerator.DivededSpawn(gameObject, transform.position);
             }
         }
         else if (collision.CompareTag("EnemyBullet") == true)
