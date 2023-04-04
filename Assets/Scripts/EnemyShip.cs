@@ -104,12 +104,22 @@ public class EnemyShip : MonoBehaviour
         }
         else if (collision.CompareTag("WallRight") == true)
         {
-            ApplyForce(Vector2.left * 1f, true);
+            // 接地している速度を取得する
+            float contactSpeed = Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x);
+
+            // 速度に応じて反発力を調整する
+            float forceMagnitude = Mathf.Lerp(1f, 13f, Mathf.InverseLerp(0f, 10f, contactSpeed));
+            ApplyForce(Vector2.left * forceMagnitude, false);
             return;
         }
         else if (collision.CompareTag("WallLeft") == true)
         {
-            ApplyForce(Vector2.right * 1f, true);
+            // 接地している速度を取得する
+            float contactSpeed = Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x);
+
+            // 速度に応じて反発力を調整する
+            float forceMagnitude = Mathf.Lerp(1f, 13f, Mathf.InverseLerp(0f, 10f, contactSpeed));
+            ApplyForce(Vector2.right * forceMagnitude, false);
             return;
         }
         else

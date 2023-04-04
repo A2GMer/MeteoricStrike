@@ -9,4 +9,9 @@ namespace Const
     {
         public const float CONST_BOUNCE_HEIGHT = 17f;
     }
+
+    public static class SIZE
+    {
+        public const float CONST_SPLITED_SIZE = 0.7f;
+    }
 }

@@ -64,11 +64,11 @@ public class EnemyGenerator : MonoBehaviour
     public void DivededSpawn(GameObject enemy, Vector3 position)
     {
         GameObject rightEnemy = Instantiate(enemyPrefab, position, Quaternion.identity);
-        rightEnemy.transform.localScale = enemy.transform.localScale * 0.8f;
+        rightEnemy.transform.localScale = enemy.transform.localScale * Const.SIZE.CONST_SPLITED_SIZE;
         // 敵が撃破されたら、現在の敵数を1増やす
         currentEnemyCount++;
         GameObject leftEnemy = Instantiate(enemyPrefab, position, Quaternion.identity);
-        leftEnemy.transform.localScale = enemy.transform.localScale * 0.8f;
+        leftEnemy.transform.localScale = enemy.transform.localScale * Const.SIZE.CONST_SPLITED_SIZE;
         // 敵が撃破されたら、現在の敵数を1増やす
         currentEnemyCount++;
 
