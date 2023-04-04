@@ -28,16 +28,18 @@ public class EnemyShip : MonoBehaviour
     public int dividedSpawnCount; // 敵の分裂回数
     private int currentLife; // 敵の現在のライフ
 
+    public SpriteRenderer spriteRenderer;
+
     public EnemyShip()
     {
         currentLife = Const.ENEMY.CONST_MAX_ENEMY_LIFE;
         dividedSpawnCount = 0;
     }
 
-    float offset;
     void Start()
     {
-        offset = Random.Range(0, 2f * Mathf.PI);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        //var offset = Random.Range(0, 2f * Mathf.PI);
         //InvokeRepeating("Shot", 2f, 0.5f);
         // GameObject.Find("GameController");
         // ・ヒエラルキー上のGameControllerという名前のオブジェクトを取得
@@ -61,6 +63,11 @@ public class EnemyShip : MonoBehaviour
             // 敵数カウントを減らす
             enemyGenerator.OnEnemyDestroyed();
         }
+        // ライフ値に応じた色を設定する
+        // 敵のライフに応じて色を変化させる
+        float t = Mathf.Clamp01((float)currentLife / Const.ENEMY.CONST_MAX_ENEMY_LIFE);
+        spriteRenderer.color = Color.Lerp(Color.red, Color.blue, t);
+        spriteRenderer.color = Color.Lerp(spriteRenderer.color, Color.yellow, t);
     }
 
     // 敵に弾が当たったら爆発する
