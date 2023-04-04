@@ -19,7 +19,7 @@ public class EnemyGenerator : MonoBehaviour
     void Spawn()
     {
         // 現在の敵数が最大敵数より少なければ生成する
-        if (currentEnemyCount < Const.COUNT.CONST_MAX_ENEMY)
+        if (currentEnemyCount < Const.ENEMY.CONST_MAX_ENEMY)
         {
             // 画面端のx座標を求める
             float screenX = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0f, 0f)).x;

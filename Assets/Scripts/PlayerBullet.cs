@@ -16,4 +16,17 @@ public class PlayerBullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("EnemyShip") == true)
+        {
+            // 敵に攻撃を与える
+            EnemyShip enemy = collision.GetComponent<EnemyShip>();
+            enemy.ApplyDamage(Const.PLAYER.CONST_PLAYER_ATTACK);
+
+            // 弾を破壊する
+            Destroy(gameObject);
+        }
+    }
 }

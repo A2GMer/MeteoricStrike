@@ -25,12 +25,12 @@ public class EnemyShip : MonoBehaviour
     // GameControllerの入れ物を作る：AddScoreを使いたから
     GameController gameController;
     EnemyGenerator enemyGenerator;
-    private int hitCount;
-    public int dividedSpawnCount;
+    public int dividedSpawnCount; // 敵の分裂回数
+    private int currentLife; // 敵の現在のライフ
 
     public EnemyShip()
     {
-        hitCount = 0;
+        currentLife = Const.ENEMY.CONST_MAX_ENEMY_LIFE;
         dividedSpawnCount = 0;
     }
 
@@ -81,23 +81,7 @@ public class EnemyShip : MonoBehaviour
         {
             // スコア加算
             gameController.AddScore();
-            // hitCountをインクリメント
-            hitCount++;
-            // hitCountがライフ0になった場合は敵を破壊
-            if (hitCount >= Const.COUNT.CONST_MAX_ENEMY_LIFE)
-            {
-                //敵を分裂増殖
-                if (dividedSpawnCount <= Const.COUNT.CONSR_MAX_DIVIDED)
-                {
-                    dividedSpawnCount++;
-                    enemyGenerator.DivededSpawn(gameObject, transform.position, dividedSpawnCount);
-                }
-                // dividedSpawnCountが限界値に達した場合は敵を分裂させない
-                else
-                {
-                    Destroy(gameObject);
-                }
-            }
+            return;
         }
         else if (collision.CompareTag("EnemyBullet") == true)
         {
@@ -159,5 +143,25 @@ public class EnemyShip : MonoBehaviour
             rb.velocity = Vector2.zero;  // 速度を一度ゼロにする
         }
         rb.AddForce(force, ForceMode2D.Impulse);
+    }
+
+    public void ApplyDamage(int damage)
+    {
+        currentLife -= damage;
+        if (currentLife <= 0)
+        {
+            //敵を分裂増殖
+            if (dividedSpawnCount <= Const.ENEMY.CONSR_MAX_DIVIDED)
+            {
+                dividedSpawnCount++;
+                enemyGenerator.DivededSpawn(gameObject, transform.position, dividedSpawnCount);
+            }
+            // dividedSpawnCountが限界値に達した場合は敵を分裂させない
+            else
+            {
+                // 敵を破壊する
+                DestroyEnemy();
+            }
+        }
     }
 }
