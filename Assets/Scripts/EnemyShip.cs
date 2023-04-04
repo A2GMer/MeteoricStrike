@@ -26,10 +26,12 @@ public class EnemyShip : MonoBehaviour
     GameController gameController;
     EnemyGenerator enemyGenerator;
     private int hitCount;
+    public int dividedSpawnCount;
 
     public EnemyShip()
     {
         hitCount = 0;
+        dividedSpawnCount = 0;
     }
 
     float offset;
@@ -81,11 +83,20 @@ public class EnemyShip : MonoBehaviour
             gameController.AddScore();
             // hitCountをインクリメント
             hitCount++;
-            // hitCountが3に達した場合は敵を破壊
-            if (hitCount >= 3)
+            // hitCountがライフ0になった場合は敵を破壊
+            if (hitCount >= Const.COUNT.CONST_MAX_ENEMY_LIFE)
             {
-                DestroyEnemy();
-                enemyGenerator.DivededSpawn(gameObject, transform.position);
+                //敵を分裂増殖
+                if (dividedSpawnCount <= Const.COUNT.CONSR_MAX_DIVIDED)
+                {
+                    dividedSpawnCount++;
+                    enemyGenerator.DivededSpawn(gameObject, transform.position, dividedSpawnCount);
+                }
+                // dividedSpawnCountが限界値に達した場合は敵を分裂させない
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
         }
         else if (collision.CompareTag("EnemyBullet") == true)

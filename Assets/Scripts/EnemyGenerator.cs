@@ -61,14 +61,23 @@ public class EnemyGenerator : MonoBehaviour
         currentEnemyCount--;
     }
 
-    public void DivededSpawn(GameObject enemy, Vector3 position)
+    public void DivededSpawn(GameObject enemyObject, Vector3 position, int dividedspawncount)
     {
+        // 引数で受け取ったenemyObjectを破壊
+        Destroy(enemyObject);
+
+        // 現在の敵数を1減らす
+        currentEnemyCount--;
+
         GameObject rightEnemy = Instantiate(enemyPrefab, position, Quaternion.identity);
-        rightEnemy.transform.localScale = enemy.transform.localScale * Const.SIZE.CONST_SPLITED_SIZE;
+        rightEnemy.transform.localScale = enemyObject.transform.localScale * Const.SIZE.CONST_SPLITED_SIZE;
+        rightEnemy.GetComponent<EnemyShip>().dividedSpawnCount = dividedspawncount;
         // 敵が撃破されたら、現在の敵数を1増やす
         currentEnemyCount++;
+
         GameObject leftEnemy = Instantiate(enemyPrefab, position, Quaternion.identity);
-        leftEnemy.transform.localScale = enemy.transform.localScale * Const.SIZE.CONST_SPLITED_SIZE;
+        leftEnemy.transform.localScale = enemyObject.transform.localScale * Const.SIZE.CONST_SPLITED_SIZE;
+        leftEnemy.GetComponent<EnemyShip>().dividedSpawnCount = dividedspawncount;
         // 敵が撃破されたら、現在の敵数を1増やす
         currentEnemyCount++;
 
